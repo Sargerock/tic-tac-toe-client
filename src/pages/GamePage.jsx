@@ -1,26 +1,43 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
+import {useAlert} from "react-alert";
 
 import {useGame} from "../store/game/game-selectors";
 import Field from "../components/Field";
 import {startGame} from "../store/game/game-actions";
+import NavBar from "../components/NavBar";
+import {saveGameId} from "../utils";
 
 import {Button, MainWrapper, StyledBlock} from "../components/styles";
 
 const GamePage = () => {
 	const dispatch = useDispatch();
-	const {field, message, isGameOver, gameId} = useGame();
+	const alert = useAlert();
+	const {field, message, isGameOver, isLoading} = useGame();
 
 	return (
-		<MainWrapper>
-			<StyledBlock height="60px">
-				<h2>{message}</h2>
-			</StyledBlock>
-			<Field field={field}/>
-			<StyledBlock height="100px">
-				{(!gameId || isGameOver) && <Button onClick={() => dispatch(startGame())}>New game</Button>}
-			</StyledBlock>
-		</MainWrapper>
+		<>
+			<NavBar/>
+			<MainWrapper>
+				<StyledBlock height="60px">
+					<h2>{message}</h2>
+				</StyledBlock>
+				<Field field={field}/>
+				<StyledBlock height="100px">
+					{isGameOver && <Button
+						onClick={async () => {
+							try {
+								const action = await dispatch(startGame());
+								saveGameId(action.payload.data.id)
+							} catch (e) {
+								alert.show(e.payload.response.data.message, {type: "error"})
+							}
+						}}
+						disabled={isLoading}
+					>New game</Button>}
+				</StyledBlock>
+			</MainWrapper>
+		</>
 	);
 };
 

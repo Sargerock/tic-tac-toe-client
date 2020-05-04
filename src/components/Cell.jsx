@@ -23,7 +23,7 @@ Cell.propTypes = {
 	value: PropTypes.oneOf(["X", "O", ""]),
 	position: PropTypes.number.isRequired,
 	onClickHandler: PropTypes.func.isRequired,
-	disabled: PropTypes.bool.isRequired
+	disabled: PropTypes.bool
 };
 
 export default Cell;

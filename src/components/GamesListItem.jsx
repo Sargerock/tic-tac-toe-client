@@ -3,13 +3,17 @@ import moment from "moment";
 
 import Field from "./Field";
 
-import {WrapperGamesListItem} from "./styles";
+import {FlexWrapper, WrapperGamesListItem} from "./styles";
+import Step from "./Step";
 
-const GamesListItem = ({field, createdAt}) => {
+const GamesListItem = ({id, field, createdAt, history}) => {
 	return (
 		<WrapperGamesListItem>
 			<Field field={field} disabled/>
-			<p>{moment(createdAt).format("MMMM D. LT")}</p>
+			<FlexWrapper>
+				<div>{moment(createdAt).format("MMMM D. LT")}</div>
+				{history.map((stepId, index) => <Step key={stepId} id={stepId} index={index + 1} gameId={id} />)}
+			</FlexWrapper>
 		</WrapperGamesListItem>
 	);
 };

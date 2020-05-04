@@ -4,7 +4,8 @@ import {useDispatch} from "react-redux";
 
 import Cell from "./Cell";
 import {useGame} from "../store/game/game-selectors";
-import {makeMove} from "../store/game/game-actions";
+import {makeStep} from "../store/game/game-actions";
+import {saveToHistory} from "../store/history/history-actions";
 
 import {WrapperField} from "./styles"
 
@@ -12,9 +13,13 @@ const Field = ({field, disabled}) => {
 	const dispatch = useDispatch();
 	const {player, isGameOver} = useGame();
 
-	const onCellClickHandler = (position) => {
-		dispatch(makeMove(player, position));
+	const onCellClickHandler = async (position) => {
+		const action = await dispatch(makeStep(player, position));
+		if (action.payload.data.isGameOver) {
+			dispatch(saveToHistory(action.payload.data.game));
+		}
 	}
+
 	return (
 		<WrapperField>
 			{field.map((item, index) => <Cell

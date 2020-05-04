@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {Circle, Cross} from "@styled-icons/entypo";
 import PropTypes from "prop-types";
+import {NavLink} from "react-router-dom";
 
 // common
 export const MainWrapper = styled.div`
@@ -89,4 +90,42 @@ export const WrapperGamesListItem = styled.div`
 	display: flex;
 	justify-content: flex-start;
 	margin-bottom: 30px;
+`;
+
+export const FlexWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+`;
+
+// Step
+export const StepWrapper = styled.div`
+	margin: 5px;
+	cursor: pointer;
+`;
+
+// NavBar
+export const NavBarWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+`;
+
+export const LinkNavBar = styled(NavLink)`
+	text-decoration: none;
+    color: #969696;
+    margin: 0 20px;
+    
+    &.active{
+    	color: #000;
+    }
+`;
+
+// Splash
+export const SplashWrapper = styled.div`
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 `;

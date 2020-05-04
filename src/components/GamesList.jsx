@@ -20,7 +20,7 @@ const GamesList = () => {
 				hasMore={hasMore}
 				loader={<div key={0}>Loading</div>}
 			>
-				{games.map(game => <GamesListItem key={game._id} {...game}/>)}
+				{games.map(game => <GamesListItem key={game.id} {...game}/>)}
 			</InfiniteScroll>
 		</WrapperGamesList>
 	);
