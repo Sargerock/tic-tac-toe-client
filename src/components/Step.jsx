@@ -19,7 +19,7 @@ const Step = ({id, gameId, index}) => {
 				const action = await dispatch(fetchStep(id));
 				dispatch(setStep(gameId, action.payload.data));
 			} catch (e) {
-				alert.show(e.payload.response.data.message, {type: "error"})
+				alert.show(e.payload.message, {type: "error"})
 			}
 		}
 	}

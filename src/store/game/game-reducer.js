@@ -1,6 +1,7 @@
 import {success, error} from "redux-saga-requests";
 
 import {FETCH_GAME, MAKE_STEP, START_GAME} from "./game-actions";
+import {getMessage} from "../../utils";
 
 const initialState = {
 	gameId: "",
@@ -34,24 +35,30 @@ export const gameReducer = (state = initialState, action) => {
 				isLoading: false,
 				isInitialized: true
 			};
-		case success(MAKE_STEP):
+		case success(MAKE_STEP): {
+			const {field, player, winner} = action.payload.data.game;
+			const message = action.payload.data.isGameOver ? getMessage(player, winner) : "";
 			return {
 				...state,
-				field: action.payload.data.game.field,
+				field,
 				isGameOver: action.payload.data.isGameOver,
-				message: action.payload.data.message,
+				message,
 				isLoading: false,
 			}
-		case success(FETCH_GAME):
+		}
+		case success(FETCH_GAME): {
+			const {field, player, winner} = action.payload.data.game;
+			const message = action.payload.data.isGameOver ? getMessage(player, winner) : "";
 			return {
 				...state,
 				gameId: action.payload.data.game.id,
-				field: action.payload.data.game.field,
+				field,
 				isGameOver: action.payload.data.isGameOver,
-				message: action.payload.data.message,
+				message,
 				isLoading: false,
 				isInitialized: true
 			}
+		}
 		case error(FETCH_GAME):
 			return {
 				...state,

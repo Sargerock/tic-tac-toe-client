@@ -13,8 +13,10 @@ export const makeStep = (player, position) => (dispatch, getState) => {
 }
 
 export const START_GAME = "game/START_GAME";
-export const startGame = () =>
-	createRequestAction(START_GAME, "post", "/game", null, {asPromise: true});
+export const startGame = () => (dispatch, getState) => {
+	const {player} = getState().game
+	return dispatch(createRequestAction(START_GAME, "post", "/game", {player}, {asPromise: true}));
+}
 
 export const FETCH_GAME = "game/FETCH_GAME";
 export const initializeApp = () => {

@@ -7,4 +7,7 @@ export default createGlobalStyle`
 	div {
 		margin: 0;
 	}
+	h3 {
+		margin: 0;
+	}
 `;

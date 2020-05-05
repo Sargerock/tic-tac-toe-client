@@ -16,3 +16,11 @@ export const saveGameId = id => {
 }
 
 export const loadGameId = () => localStorage.getItem(GAME_ID);
+
+export const getMessage = (player, winner) => {
+	if (!winner) {
+		return "Draw."
+	} else {
+		return player === winner ? "Player wins the game!" : "Bot wins the game!";
+	}
+}

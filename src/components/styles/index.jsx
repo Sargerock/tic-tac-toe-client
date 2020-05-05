@@ -95,7 +95,7 @@ export const WrapperGamesListItem = styled.div`
 export const FlexWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding: 10px;
+	padding: 5px 10px;
 `;
 
 // Step
