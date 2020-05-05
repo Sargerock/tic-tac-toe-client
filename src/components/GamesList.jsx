@@ -18,7 +18,6 @@ const GamesList = () => {
 					dispatch(fetchGames())
 				}}
 				hasMore={hasMore}
-				loader={<div key={0}>Loading</div>}
 			>
 				{games.map(game => <GamesListItem key={game.id} {...game}/>)}
 			</InfiniteScroll>

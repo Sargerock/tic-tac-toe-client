@@ -28,13 +28,15 @@ const GamePage = () => {
 						onClick={async () => {
 							try {
 								const action = await dispatch(startGame());
-								saveGameId(action.payload.data.id)
+								saveGameId(action.payload.data.id);
 							} catch (e) {
-								alert.show(e.payload.response.data.message, {type: "error"})
+								alert.show(e.payload.message, {type: "error"});
 							}
 						}}
 						disabled={isLoading}
-					>New game</Button>}
+					>
+						New game
+					</Button>}
 				</StyledBlock>
 			</MainWrapper>
 		</>

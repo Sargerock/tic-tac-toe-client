@@ -22,7 +22,7 @@ function App() {
 				saveGameId(action.payload.data.id || action.payload.data.game.id);
 			})
 			.catch((error) => {
-				alert.show(error.payload.response.data.message, {type: "error"});
+				alert.show(error.payload.message, {type: "error"});
 			})
 		// eslint-disable-next-line
 	}, [dispatch]);

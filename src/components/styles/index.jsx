@@ -129,3 +129,11 @@ export const SplashWrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
 `;
+
+// Loader
+export const ImageLoader = styled.img`
+	height: 50px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+`;
