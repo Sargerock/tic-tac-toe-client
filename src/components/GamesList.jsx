@@ -10,12 +10,12 @@ import {WrapperGamesList} from "./styles";
 
 const GamesList = () => {
 	const dispatch = useDispatch();
-	const {games, hasMore} = useHistory()
+	const {games, hasMore, offset, limit} = useHistory()
 	return (
 		<WrapperGamesList>
 			<InfiniteScroll
 				loadMore={() => {
-					dispatch(fetchGames())
+					dispatch(fetchGames(offset, limit));
 				}}
 				hasMore={hasMore}
 			>

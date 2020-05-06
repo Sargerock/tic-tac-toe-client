@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {BrowserRouter as Router} from "react-router-dom";
 import {useDispatch} from "react-redux";
+import {Provider as AlertProvider} from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 import Navigation from "./components/Navigation";
-import {fetchGame, setInitialized} from "./store/game/game-actions";
+import {initializeApp} from "./store/game/game-actions";
 import {useGame} from "./store/game/game-selectors";
-import {loadGameId} from "./utils";
 import Splash from "./components/Splash";
 
 import GlobalStyle from "./components/styles/global"
@@ -15,26 +15,16 @@ function App() {
 	const {isInitialized} = useGame();
 
 	useEffect(() => {
-		const gameId = loadGameId();
-		if (gameId) {
-			dispatch(fetchGame(gameId));
-		} else {
-			dispatch(setInitialized());
-		}
-	}, [dispatch]);
+		dispatch(initializeApp());
+		// eslint-disable-next-line
+	}, []);
 
-	if (!isInitialized) {
-		return <Splash/>
-	} else {
-		return (
-			<>
-				<GlobalStyle/>
-				<Router>
-					<Navigation/>
-				</Router>
-			</>
-		);
-	}
+	return (
+		<AlertProvider template={AlertTemplate} position="bottom center" timeout={5000}>
+			<GlobalStyle/>
+			{isInitialized ? <Navigation/> : <Splash/>}
+		</AlertProvider>
+	);
 }
 
 export default App;

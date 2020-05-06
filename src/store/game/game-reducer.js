@@ -1,14 +1,13 @@
 import {success, error} from "redux-saga-requests";
 
 import {FETCH_GAME, MAKE_STEP, SET_INITIALIZED, SET_PLAYER, START_GAME} from "./game-actions";
-import {getMessage} from "../../utils";
 
 const initialState = {
-	gameId: "",
+	gameId: undefined,
 	field: [],
 	player: "X",
-	isGameOver: false,
-	message: "",
+	isGameOver: true,
+	winner: undefined,
 	isInitialized: false
 }
 
@@ -35,8 +34,7 @@ export const gameReducer = (state = initialState, action) => {
 		case SET_INITIALIZED:
 			return {
 				...state,
-				isInitialized: true,
-				isGameOver: true
+				isInitialized: true
 			}
 		case success(START_GAME):
 			return {
@@ -46,31 +44,25 @@ export const gameReducer = (state = initialState, action) => {
 				isLoading: false,
 				isInitialized: true
 			};
-		case success(MAKE_STEP): {
-			const {field, player, winner} = action.payload.data.game;
-			const message = action.payload.data.isGameOver ? getMessage(player, winner) : "";
+		case success(MAKE_STEP):
 			return {
 				...state,
-				field,
+				field: action.payload.data.game.field,
 				isGameOver: action.payload.data.isGameOver,
-				message,
+				winner: action.payload.data.game.winner,
 				isLoading: false,
 			}
-		}
-		case success(FETCH_GAME): {
-			const {field, player, winner} = action.payload.data.game;
-			const message = action.payload.data.isGameOver ? getMessage(player, winner) : "";
+		case success(FETCH_GAME):
 			return {
 				...state,
 				gameId: action.payload.data.game.id,
-				field,
+				field: action.payload.data.game.field,
 				isGameOver: action.payload.data.isGameOver,
-				message,
+				winner: action.payload.data.game.winner,
 				isLoading: false,
 				isInitialized: true,
-				player
+				player: action.payload.data.game.player
 			}
-		}
 		case error(FETCH_GAME):
 			return {
 				...state,

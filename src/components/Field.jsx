@@ -11,10 +11,10 @@ import {WrapperField} from "./styles"
 
 const Field = ({field, disabled}) => {
 	const dispatch = useDispatch();
-	const {player, isGameOver} = useGame();
+	const {gameId, player, isGameOver} = useGame();
 
 	const onCellClickHandler = async (position) => {
-		const action = await dispatch(makeStep(player, position));
+		const action = await dispatch(makeStep(gameId, player, position));
 		if (action.payload.data.isGameOver) {
 			dispatch(saveToHistory(action.payload.data.game));
 		}
