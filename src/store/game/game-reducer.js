@@ -1,6 +1,6 @@
 import {success, error} from "redux-saga-requests";
 
-import {FETCH_GAME, MAKE_STEP, START_GAME} from "./game-actions";
+import {FETCH_GAME, MAKE_STEP, SET_INITIALIZED, SET_PLAYER, START_GAME} from "./game-actions";
 import {getMessage} from "../../utils";
 
 const initialState = {
@@ -26,6 +26,17 @@ export const gameReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: true
+			}
+		case SET_PLAYER:
+			return {
+				...state,
+				player: action.payload.player
+			}
+		case SET_INITIALIZED:
+			return {
+				...state,
+				isInitialized: true,
+				isGameOver: true
 			}
 		case success(START_GAME):
 			return {
@@ -56,7 +67,8 @@ export const gameReducer = (state = initialState, action) => {
 				isGameOver: action.payload.data.isGameOver,
 				message,
 				isLoading: false,
-				isInitialized: true
+				isInitialized: true,
+				player
 			}
 		}
 		case error(FETCH_GAME):

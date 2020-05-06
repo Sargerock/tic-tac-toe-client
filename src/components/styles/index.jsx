@@ -36,6 +36,7 @@ export const Button = styled.button`
 
 export const StyledBlock = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	height: ${({height}) => height};
@@ -47,6 +48,39 @@ StyledBlock.defaultProps = {
 	height: "auto"
 };
 
+export const FlexWrapper = styled.div`
+	display: flex;
+	flex-direction: ${({flexDirection}) => flexDirection};
+	justify-content: ${({justifyContent}) => justifyContent};
+	align-items: ${({alignItems}) => alignItems};
+	padding: ${({padding}) => padding};
+	padding: ${({margin}) => margin};
+`;
+FlexWrapper.propTypes = {
+	flexDirection: PropTypes.string,
+	justifyContent: PropTypes.string,
+	alignItems: PropTypes.string,
+	padding: PropTypes.string,
+	margin: PropTypes.string
+}
+FlexWrapper.defaultProps = {
+	flexDirection: "row",
+	justifyContent: "normal",
+	alignItems: "normal",
+	padding: "0",
+	margin: "0"
+}
+
+export const Separator = styled.div`
+	margin: ${({margin}) => margin};
+`;
+Separator.propTypes = {
+	margin: PropTypes.string
+}
+Separator.defaultprops = {
+	margin: "0"
+}
+
 // Cell
 export const ButtonCell = styled(Button)`
 	display: flex;
@@ -56,6 +90,7 @@ export const ButtonCell = styled(Button)`
 	width: 100px;
 	margin: 10px;
 	padding: 0;
+	opacity: ${({selected}) => selected ? "1" : "0.3"};
 	
 	:disabled {
 		color: initial;
@@ -90,12 +125,6 @@ export const WrapperGamesListItem = styled.div`
 	display: flex;
 	justify-content: flex-start;
 	margin-bottom: 30px;
-`;
-
-export const FlexWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	padding: 5px 10px;
 `;
 
 // Step

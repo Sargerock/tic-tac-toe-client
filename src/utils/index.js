@@ -21,6 +21,6 @@ export const getMessage = (player, winner) => {
 	if (!winner) {
 		return "Draw."
 	} else {
-		return player === winner ? "Player wins the game!" : "Bot wins the game!";
+		return player === winner ? "Player won the game!" : "Bot won the game!";
 	}
 }

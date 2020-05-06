@@ -27,7 +27,7 @@ const Field = ({field, disabled}) => {
 				position={index}
 				value={item}
 				disabled={disabled || isGameOver}
-				onClickHandler={onCellClickHandler}
+				onClickHandler={!item ? onCellClickHandler : undefined}
 			/>)}
 		</WrapperField>
 	);

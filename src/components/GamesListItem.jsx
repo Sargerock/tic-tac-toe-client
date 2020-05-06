@@ -11,7 +11,7 @@ const GamesListItem = ({id, field, createdAt, history, player, winner}) => {
 	return (
 		<WrapperGamesListItem>
 			<Field field={field} disabled/>
-			<FlexWrapper>
+			<FlexWrapper padding="5px 10px" flexDirection="column">
 				<h3>{getMessage(player, winner)}</h3>
 				<div>{moment(createdAt).format("MMMM D. LT")}</div>
 				{history.map((stepId, index) => <Step key={stepId} id={stepId} index={index + 1} gameId={id}/>)}

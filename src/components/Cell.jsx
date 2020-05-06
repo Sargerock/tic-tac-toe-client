@@ -5,14 +5,17 @@ import {useGame} from "../store/game/game-selectors";
 
 import {CircleStyled, CrossStyled, ButtonCell} from "./styles"
 
-const Cell = ({value, position, disabled, onClickHandler}) => {
+const Cell = ({value, position, disabled, onClickHandler, selected}) => {
 	const {isLoading} = useGame();
 	return (
 		<ButtonCell
 			onClick={() => {
-				onClickHandler(position);
+				if (onClickHandler) {
+					onClickHandler(position);
+				}
 			}}
-			disabled={disabled || isLoading || value }
+			disabled={disabled || isLoading}
+			selected={selected}
 		>
 			{value && (value === "X" ? <CrossStyled/> : <CircleStyled/>)}
 		</ButtonCell>
@@ -22,8 +25,15 @@ const Cell = ({value, position, disabled, onClickHandler}) => {
 Cell.propTypes = {
 	value: PropTypes.oneOf(["X", "O", ""]),
 	position: PropTypes.number.isRequired,
-	onClickHandler: PropTypes.func.isRequired,
-	disabled: PropTypes.bool
+	onClickHandler: PropTypes.func,
+	disabled: PropTypes.bool,
+	selected: PropTypes.bool
 };
+
+Cell.defaultProps = {
+	selected: true,
+	disabled: false,
+	value: ""
+}
 
 export default Cell;

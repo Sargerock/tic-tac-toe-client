@@ -7,6 +7,7 @@ import Field from "../components/Field";
 import {startGame} from "../store/game/game-actions";
 import NavBar from "../components/NavBar";
 import {saveGameId} from "../utils";
+import FigureSelection from "../components/FigureSelection";
 
 import {Button, MainWrapper, StyledBlock} from "../components/styles";
 
@@ -19,7 +20,8 @@ const GamePage = () => {
 		<>
 			<NavBar/>
 			<MainWrapper>
-				<StyledBlock height="60px">
+				<StyledBlock height="210px">
+					{isGameOver && <FigureSelection/>}
 					<h2>{message}</h2>
 				</StyledBlock>
 				<Field field={field}/>
